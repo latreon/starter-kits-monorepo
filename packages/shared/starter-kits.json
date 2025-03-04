@@ -1,0 +1,52 @@
+{
+    "starterKits": [
+        {
+            "id": "nextjs",
+            "name": "Next.js",
+            "description": "The React Framework for Production",
+            "structure": [
+                "pages/",
+                "pages/_app.js",
+                "pages/index.js",
+                "public/",
+                "styles/",
+                "package.json"
+            ],
+            "pros": [
+                "Built-in SSR and SSG",
+                "File-system based routing",
+                "API routes support",
+                "Zero configuration"
+            ],
+            "cons": [
+                "Opinionated file structure",
+                "Learning curve for SSR concepts",
+                "More complex deployment than static sites"
+            ]
+        },
+        {
+            "id": "react",
+            "name": "React",
+            "description": "A JavaScript library for building user interfaces",
+            "structure": [
+                "src/",
+                "src/App.js",
+                "src/index.js",
+                "public/",
+                "package.json"
+            ],
+            "pros": [
+                "Flexible architecture",
+                "Large ecosystem",
+                "Strong community support",
+                "Easy to learn basics"
+            ],
+            "cons": [
+                "No built-in routing",
+                "State management requires additional libraries",
+                "Build configuration needed",
+                "SEO challenges without additional setup"
+            ]
+        }
+    ]
+}
