@@ -26,7 +26,7 @@ This project was created using `bun init` in bun v1.0.1. [Bun](https://bun.sh) i
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/starter-kits-monorepo.git
+git clone https://github.com/latreon/starter-kits-monorepo.git
 cd starter-kits-monorepo
 ```
 
