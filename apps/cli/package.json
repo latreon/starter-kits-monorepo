@@ -1,0 +1,24 @@
+{
+    "name": "create-starter-kit",
+    "version": "1.0.0",
+    "description": "CLI tool for creating starter kit projects",
+    "main": "dist/index.js",
+    "bin": {
+        "create-starter-kit": "./dist/index.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/index.js"
+    },
+    "dependencies": {
+        "commander": "^11.0.0",
+        "inquirer": "^8.2.5",
+        "fs-extra": "^11.1.1"
+    },
+    "devDependencies": {
+        "@types/inquirer": "^8.2.5",
+        "@types/fs-extra": "^11.0.1",
+        "@types/node": "^20.0.0",
+        "typescript": "^5.0.0"
+    }
+}
