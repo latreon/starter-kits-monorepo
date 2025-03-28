@@ -10,6 +10,19 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var rootCmd = &cobra.Command{
+	Use:   "starter-kit",
+	Short: "A CLI tool to generate framework starter kits",
+	Long:  `A CLI tool that helps you generate starter kits for various frameworks like React, Next.js, and Vue.js.`,
+}
+
+func Execute() {
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+}
+
 type StarterKit struct {
 	ID          string   `json:"id"`
 	Name        string   `json:"name"`
@@ -23,6 +36,10 @@ type StarterKitsData struct {
 	StarterKits []StarterKit `json:"starterKits"`
 }
 
+func init() {
+	rootCmd.AddCommand(generateCmd)
+}
+
 var generateCmd = &cobra.Command{
 	Use:   "generate",
 	Short: "Generate a new starter kit",
@@ -30,17 +47,34 @@ var generateCmd = &cobra.Command{
 }
 
 func runGenerate(cmd *cobra.Command, args []string) {
-	// Read starter kits data
-	data, err := readStarterKitsData()
-	if err != nil {
-		fmt.Printf("Error reading starter kits data: %v\n", err)
-		return
+	// First, ask what they want to build
+	buildType := ""
+	buildPrompt := &survey.Select{
+		Message: "What do you want to build?",
+		Options: []string{
+			"Website",
+			"Mobile App",
+			"API",
+			"Desktop App",
+			"CLI Tool",
+		},
 	}
+	survey.AskOne(buildPrompt, &buildType)
 
-	// Prepare framework choices
+	// Then ask for development type
+	developmentType := ""
+	typePrompt := &survey.Select{
+		Message: "What would you like to develop?",
+		Options: []string{"Frontend", "Backend"},
+	}
+	survey.AskOne(typePrompt, &developmentType)
+
+	// Define frameworks based on selection
 	var frameworks []string
-	for _, kit := range data.StarterKits {
-		frameworks = append(frameworks, kit.Name)
+	if developmentType == "Frontend" {
+		frameworks = []string{"React", "Vue.js", "Next.js"}
+	} else {
+		frameworks = []string{"Node.js", "Go", "Python/FastAPI"}
 	}
 
 	// Prompt for framework selection
@@ -54,7 +88,8 @@ func runGenerate(cmd *cobra.Command, args []string) {
 	// Prompt for TypeScript
 	useTS := false
 	tsPrompt := &survey.Confirm{
-		Message: "Use TypeScript?",
+		Message: "Would you like to use TypeScript?",
+		Default: true,
 	}
 	survey.AskOne(tsPrompt, &useTS)
 
@@ -83,4 +118,4 @@ func readStarterKitsData() (*StarterKitsData, error) {
 	}
 
 	return &starterKits, nil
-} 
+}

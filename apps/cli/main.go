@@ -21,4 +21,4 @@ func main() {
 	}()
 
 	cmd.Execute()
-} 
+}
